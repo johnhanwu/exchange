@@ -1,0 +1,170 @@
+package entity;
+
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import vo.member;
+
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import vo.member;
+import dao.impl.implmember;
+public class loginUI extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField username;
+	private JPasswordField password;
+	private JTextField time;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					loginUI frame = new loginUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		  SwingUtilities.invokeLater(new Runnable() {
+	            @Override
+	            public void run() {
+	                new loginUI().setVisible(true);
+	            }
+	        });
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public loginUI() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 650, 500);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(192, 192, 192));
+		panel.setBounds(60, 10, 525, 404);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("帳號:");
+		lblNewLabel.setFont(new Font("微軟正黑體", Font.PLAIN, 20));
+		lblNewLabel.setBounds(135, 102, 53, 33);
+		panel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("密碼:");
+		lblNewLabel_1.setFont(new Font("微軟正黑體", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(135, 192, 53, 33);
+		panel.add(lblNewLabel_1);
+		
+		username = new JTextField();
+		username.setBounds(209, 114, 96, 21);
+		panel.add(username);
+		username.setColumns(10);
+		
+		password = new JPasswordField();
+		password.setBounds(209, 203, 96, 21);
+		panel.add(password);
+		
+		JButton btnNewButton = new JButton("登入");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					ObjectOutputStream oos=new ObjectOutputStream(
+							new FileOutputStream("member.txt"));
+				
+				
+				String USERNAME=username.getText();
+				String PASSWORD=password.getText();
+				member m=new implmember().query(USERNAME, PASSWORD);
+				
+				if(m!=null)
+				{
+					oos.writeObject(m);
+					orderUI o=new orderUI();
+					o.setVisible(true);
+					dispose();
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "無此帳號,請先完成註冊");
+				}
+			}catch(Exception E){
+					
+			E.printStackTrace();
+			}
+		}
+	});
+		btnNewButton.setFont(new Font("微軟正黑體", Font.PLAIN, 22));
+		btnNewButton.setBounds(135, 326, 96, 33);
+		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("註冊");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				addmemberUI a=new addmemberUI();
+				a.setVisible(true);
+				dispose();
+				
+			}
+		});
+		btnNewButton_1.setFont(new Font("微軟正黑體", Font.PLAIN, 20));
+		btnNewButton_1.setBounds(275, 326, 96, 34);
+		panel.add(btnNewButton_1);
+		
+		time = new JTextField();
+		time.setText("0");
+		time.setBounds(377, 10, 138, 21);
+		panel.add(time);
+		time.setColumns(10);
+		
+		Timer timer = new Timer(1000, new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	             LocalDateTime now = LocalDateTime.now();
+	             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+	             String formattedTime = now.format(formatter);
+	             time.setText(formattedTime);
+	         
+
+			
+				
+			}
+	     });
+		 timer.start();
+		
+	    
+		
+	}
+	
+	 
+}

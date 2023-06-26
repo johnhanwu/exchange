@@ -1,0 +1,17 @@
+package dao;
+
+import java.util.Date;
+
+import vo.order;
+
+public interface hwporderdao {
+//create
+void add(String name,int assets,Date pdate);	
+	
+	
+void add(order o);
+//read	
+int queryassets(int assets);	
+	
+	
+}

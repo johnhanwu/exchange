@@ -1,0 +1,52 @@
+package vo;
+
+public class order {
+	private Integer id;
+	private String name;
+	private int nt;
+	private Double rmb;
+	private Double usd;
+	
+	
+	public order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public order(String name, int nt, Double rmb, Double usd) {
+		super();
+		this.name = name;
+		this.nt = nt;
+		this.rmb = rmb;
+		this.usd = usd;
+		rmb=nt*0.23;
+		usd=nt*0.033;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Double getNt() {
+		return nt;
+	}
+	public void setNt(Double nt) {
+		this.nt = nt;
+	}
+	public Double getRmb() {
+		rmb=nt*0.23;
+		return rmb;
+	}
+	public void setRmb(Double rmb) {
+		this.rmb = rmb;
+	}
+	public Double getUsd() {
+		usd=nt*0.033;
+		return usd;
+	}
+	public void setUsd(Double usd) {
+		this.usd = usd;
+	}
+	
+	
+}

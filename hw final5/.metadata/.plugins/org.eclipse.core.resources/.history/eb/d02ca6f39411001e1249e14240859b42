@@ -1,0 +1,109 @@
+package test;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+public class listenertest extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField rmb;
+	private JTextField usd;
+	private JTextField jpy;
+	private JTextField nt;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					listenertest frame = new listenertest();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public listenertest() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 625, 420);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		rmb = new JTextField();
+		rmb.setBounds(79, 82, 96, 21);
+		contentPane.add(rmb);
+		rmb.setColumns(10);
+		
+		usd = new JTextField();
+		usd.setBounds(79, 151, 96, 21);
+		contentPane.add(usd);
+		usd.setColumns(10);
+		
+		jpy = new JTextField();
+		jpy.setBounds(79, 218, 96, 21);
+		contentPane.add(jpy);
+		jpy.setColumns(10);
+		
+		nt = new JTextField();
+		nt.setBounds(79, 303, 96, 21);
+		contentPane.add(nt);
+		nt.setColumns(10);
+		
+		rmb.getDocument().addDocumentListener(new CurrencyDocumentListener());
+        usd.getDocument().addDocumentListener(new CurrencyDocumentListener());
+        jpy.getDocument().addDocumentListener(new CurrencyDocumentListener());
+                  
+	}
+	  private class CurrencyDocumentListener implements DocumentListener {
+          @Override
+          public void insertUpdate(DocumentEvent e) {
+              updateTotal();
+          }
+
+          @Override
+          public void removeUpdate(DocumentEvent e) {
+              updateTotal();
+          }
+
+          @Override
+          public void changedUpdate(DocumentEvent e) {
+              updateTotal();
+          }
+
+          private void updateTotal() {
+              double rmbAmount = parseDouble(rmb.getText());
+              double usdAmount = parseDouble(usd.getText());
+              double jpyAmount = parseDouble(jpy.getText());
+
+              double totalNT = rmbAmount*4.33 + usdAmount + jpyAmount; // 加總
+
+              nt.setText(String.format("%.2f", totalNT));
+          }
+
+          private double parseDouble(String text) {
+              try {
+                  return Double.parseDouble(text);
+              } catch (NumberFormatException e) {
+                  return 0.0;
+              }
+}
+	 }
+}
+
+

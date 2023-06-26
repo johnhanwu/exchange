@@ -1,0 +1,92 @@
+package dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+
+import dao.DBConnection;
+import dao.hwporderdao;
+import vo.order;
+
+public class implorder implements hwporderdao {
+
+	public static void main(String[] args) {
+		order o=new order("aa",1000,52.0,0.0);
+		new implorder().add(o);
+
+	}
+
+	
+
+	@Override
+	public void add(String name, int nt,Date pdate) {
+		Connection conn=DBConnection.getDB();
+		String sql="insert into porder(name,nt,pdate)"
+				+ "values(?,?,?)";
+		try {
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setInt(2, nt);
+			order o=new order();
+			java.sql.Date d=new java.sql.Date(o.getPdate().getTime());
+			
+			ps.setDate(3,d);
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
+
+	public void add(order o) {
+		Connection conn=DBConnection.getDB();
+		String sql="insert into porder(name,nt,rmb,usd,pdate)"
+				+ "values(?,?,?,?,?)";
+		try {
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ps.setString(1, o.getName());
+			ps.setInt(2,o.getNt());
+			ps.setDouble(3,o.getRmb());
+			ps.setDouble(4, o.getUsd());
+			
+			java.sql.Date d=new java.sql.Date(o.getPdate().getTime());
+			ps.setDate(5, d);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+
+	@Override
+	public int queryNt(int nt) {
+		Connection conn=DBConnection.getDB();
+		String sql="select * from assets where name=?";
+		try {
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nt;
+	}
+
+		
+	}
+
+

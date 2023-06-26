@@ -1,0 +1,106 @@
+package dao.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+import dao.DBConnection;
+import dao.hwporderdao;
+import vo.member;
+import vo.order;
+
+public class implorder implements hwporderdao {
+
+	public static void main(String[] args) {
+		/*order o=new order();
+		java.sql.Timestamp d=new java.sql.Timestamp(o.getPdate().getTime());
+		System.out.print(d);*/
+		order o=new order();
+		java.sql.Date d=new java.sql.Date(o.getPdate().getTime());
+		System.out.print(d);
+	}
+
+	
+
+	
+
+
+	public void add(order o) {
+		Connection conn=DBConnection.getDB();
+		String sql="insert into porder(name,nt,rmb,usd,jpy,pdate)"
+				+ "values(?,?,?,?,?,?)";
+		try {
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ps.setString(1, o.getName());
+			ps.setDouble(2,o.getNt());
+			ps.setDouble(3,o.getRmb());
+			ps.setDouble(4, o.getUsd());
+			ps.setDouble(5, o.getJpy());
+			java.sql.Date d=new java.sql.Date(o.getPdate().getTime());
+			ps.setDate(6, d);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+
+	
+
+
+
+
+
+
+	@Override
+	public void add(String name, int assets,Date pdate) {
+		Connection conn=DBConnection.getDB();
+		String sql="insert into porder(name,assets,pdate)"
+				+ "values(?,?,?)";
+		try {
+			PreparedStatement ps=conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setInt(2, assets);
+			order o=new order();
+			java.sql.Date d=new java.sql.Date(o.getPdate().getTime());
+			ps.setDate(3, d);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+
+
+
+
+	@Override
+	public List<order> queryAll() {
+		Connection conn=DBConnection.getDB();
+		String sql="select * from porder";
+		List<order> l=new ArrayList();
+		
+		return null;
+	}
+
+
+
+
+
+
+	
+	}
+
+		
+	
+
+

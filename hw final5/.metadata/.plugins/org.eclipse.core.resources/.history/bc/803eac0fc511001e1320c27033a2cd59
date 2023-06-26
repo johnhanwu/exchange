@@ -1,0 +1,66 @@
+package vo;
+
+public class assets {
+	private String name;
+	private int totalassets;
+	private double totalrmb;
+	private double totalusd;
+	private double totaljpy;
+	private int balance;
+	public assets() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public assets(int totalassets) {
+		super();
+		this.totalassets = totalassets;
+		this.totalrmb = totalrmb;
+		this.totalusd = totalusd;
+		this.totaljpy = totaljpy;
+		this.balance = balance;
+		
+	}
+
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getTotalassets() {
+		return totalassets;
+	}
+	public void setTotalassets(int totalassets) {
+		this.totalassets = totalassets;
+	}
+	public double getTotalrmb() {
+		return totalrmb;
+	}
+	public void setTotalrmb(double totalrmb) {
+		this.totalrmb = totalrmb;
+	}
+	public double getTotalusd() {
+		return totalusd;
+	}
+	public void setTotalusd(double totalusd) {
+		this.totalusd = totalusd;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public double getTotaljpy() {
+		return totaljpy;
+	}
+
+	public void setTotaljpy(double totaljpy) {
+		this.totaljpy = totaljpy;
+	}
+	
+	
+	
+}

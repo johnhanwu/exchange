@@ -1,0 +1,11 @@
+package dao;
+
+import vo.assets;
+
+public interface hwassetsdao {
+	
+//read
+assets queryassets(String name);
+
+
+}

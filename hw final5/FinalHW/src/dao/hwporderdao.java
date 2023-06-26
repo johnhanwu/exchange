@@ -1,0 +1,24 @@
+package dao;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import vo.order;
+
+public interface hwporderdao {
+//create
+void add(String name,int assets,Date pdate);	
+	
+	
+void add(order o);
+//read	
+List<order> queryAll(String name);
+order queryID(int id);
+//update
+
+void update(order o);
+
+//delete
+void delete(int id);
+}

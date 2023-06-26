@@ -1,0 +1,14 @@
+package dao;
+
+public interface hwporderdao {
+
+void add(String name,int nt);	
+	
+	
+
+	
+	
+	
+	
+	
+}

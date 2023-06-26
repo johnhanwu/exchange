@@ -1,0 +1,60 @@
+package vo;
+
+import java.util.Date;
+
+public class order {
+	private Integer id;
+	private String name;
+	private int nt;
+	private Double rmb;
+	private Double usd;
+	private Date pdate;
+	
+	public order() {
+		super();
+		pdate=new Date();
+	}
+	public order(String name, int nt, Double rmb, Double usd) {
+		super();
+		this.name = name;
+		this.nt = nt;
+		this.rmb = rmb;
+		this.usd = usd;
+		
+		pdate=new Date();
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getNt() {
+		return nt;
+	}
+	public void setNt(int nt) {
+		this.nt = nt;
+	}
+	public Double getRmb() {
+		
+		return rmb;
+	}
+	public void setRmb(Double rmb) {
+		this.rmb = rmb;
+	}
+	public Double getUsd() {
+		
+		return usd;
+	}
+	public void setUsd(Double usd) {
+		this.usd = usd;
+	}
+	public Date getPdate() {
+		return pdate;
+	}
+	public void setPdate(Date pdate) {
+		this.pdate = pdate;
+	}
+	
+	
+}
